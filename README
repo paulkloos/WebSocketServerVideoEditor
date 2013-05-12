@@ -1,0 +1,13 @@
+This project is meant to take websocket clients and accept their commands for video file handling.
+Uses google-gson version 2.2.2 http://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.2-release.zip&can=1
+and tootallnate's websocket framework https://github.com/TooTallNate/Java-WebSocket
+
+Features:
+* uses FFMPEG command line for all video file manipulation
+* handles upload and download requests from client
+* checks for cached video files before creating new file manipulations
+
+Future features:
+* chain all commands, which are created by recieved json objects
+* all cached files will be in a hashed array
+* add authenticated users and SSL support
