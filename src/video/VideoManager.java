@@ -1,75 +1,84 @@
 package video;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.HashMap;
 
-import video.OutputLogs.ACTION;
+import server.SourceFiles;
+
+import json_objects.FileInput;
+import json_objects.Message;
+import json_objects.tools.Tool;
 
 public class VideoManager
 {
-	private ArrayList<VideoClip> clips;
-	private Properties settings;
-	private String output;
-	private String path;
-	public VideoManager()
+	private Tool[] toollist;
+	private FileInput[] filelist;
+	private SourceFiles files;
+	private ArrayList<String> filters;
+	public VideoManager(SourceFiles value)
 	{
-		
+		files = value;
+		filters = new ArrayList<String>();
 	}
-	public String getOutput()
+	public void processList(Message request)
 	{
-		return path+"\\"+output;
-	}
-	private void combineClips(ArrayList<VideoClip> value)
-	{
-		Process p;
-		OutputLogs stdout = null, errors = null;
-		List<String> commands = new ArrayList<String>();
-		ProcessBuilder builder = new ProcessBuilder();
-		//build command list
-		commands.add(settings.getProperty("FFMPEG"));
-		commands.add("-i");
-		String temp = "\"concat:"; 
-		for(int x = 0; x < value.size(); x++)
+		toollist = request.getTools();
+		for(int x = 0; x < toollist.length; x++)
 		{
-			if(x > 0)
-				temp.concat("|");
+			toollist[x].run();
+			filters.add(toollist[x].filter());
+		}
+		filelist = request.getFiles();
+		for(int x = 0; x < filelist.length; x++)
+		{//TODO add audio profile comparison
+			VideoProfile videoconversion = null;
+			AudioProfile audioconversion = null;
+			HashMap<ArrayList<String>,VideoProfile> map = new HashMap<ArrayList<String>,VideoProfile>();
+			String[] parts2 = filelist[x].getFile().split("\\\\");
+			String path = "";
+			for(int z = 0; z < parts2.length-1; z++)
+				path.concat("\\"+parts2[z]);
 			
-			temp.concat(combineList(value.get(x).getFiles()));			
+			SourceFile file = files.getFile(path, parts2[parts2.length-1]);
+			if(filelist[x].getVideo() != null)
+				videoconversion = filelist[x].getVideo().apply(file.getVideoProfile());
+			
+			if(filelist[x].getAudio() != null)
+				audioconversion = filelist[x].getAudio().apply(file.getVideoProfile().getAudio());
+			
+			if(filelist[x].getSplit() != null)
+			{
+				double itteration = Profile.timeToSecond(filelist[x].getSplit());
+				double duration = Profile.timeToSecond(filelist[x].getVideo().getDuration());
+				
+				for(double y = Profile.timeToSecond(videoconversion.getDuration()); y < duration; y += itteration)
+				{
+					VideoProfile tempprofile = new VideoProfile();
+					tempprofile.setStart(y);
+					if(x+itteration < duration)
+						tempprofile.setDuration(itteration);
+					else
+						tempprofile.setDuration(duration - y);
+										
+					map.put(tempprofile.getHashValues(), tempprofile);
+				}
+			}
+			else
+			{
+				map.put(videoconversion.getHashValues(), videoconversion);
+			}
+			HashMap<ArrayList<String>,SourceFile> children = file.getChildren();
+			ArrayList<VideoProfile> maplist = new ArrayList<VideoProfile>(map.values());
+			for(int index = 0; index < maplist.size(); index++)
+			{//TODO fix the loose ends
+				SourceFile item = children.get(maplist.get(index).getHashValues());
+				//TODO split between network and local here
+				if(item != null)
+				;//	send.add(conn, children.get(index).getAbsoluteFile(), new json_objects.File("clip", file.getRelativeFile(), children.get(index).getFileName(), item.getVideoProfile().getStart(), item.getVideoProfile().getDuration()));
+				else
+				;//	send.add(conn, file, maplist.get(index));
+			}
 		}
-		temp.concat("\"");
-		commands.add(temp);
-		commands.add("-c");
-		commands.add("copy");
-		commands.add(getOutput());
-		
-		builder.command(commands);
-		builder.redirectErrorStream(true);
-		try {
-			p = builder.start();
-			stdout = new OutputLogs(p.getInputStream(),ACTION.PRINT);
-			errors = new OutputLogs(p.getErrorStream(),ACTION.NONE);
-	
-	//OutputStream stdin = p.getOutputStream();
+	}
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally
-		{
-			stdout.Done();
-			errors.Done();
-		}
-	}
-	private String combineList(ArrayList<String> value)
-	{
-		String output = value.get(0);
-		for(int x= 1; x < value.size(); x++)
-		{
-			output.concat("|"+value.get(x));
-		}
-		return output;
-	}
 }

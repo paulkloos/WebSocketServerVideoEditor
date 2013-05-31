@@ -2,78 +2,49 @@ package json_objects;
 
 import java.util.zip.DataFormatException;
 
-import video.VideoProfile;
+import json_objects.tools.Tool;
 
 public class Message
 {
-	public enum COMMAND{FILE,FOLDER,STATUS,ACTION}
-	private String type;
-	private String path;
-	private clip clipfile;
-	private VideoProfile videofile;
-	private String upload;
+	public enum COMMAND{FILE_REQUEST,FILE_COMPILE,UPLOAD,FOLDER,STATUS,ACTION}
+	private String action;
+	private FileInput[] files;
+	private Tool[] filters;
+	public void setTools(Tool[] value)
+	{
+		filters = value;
+	}
 	public void setType(String value)
 	{
-		type = value;
+		action = value;
 	}
-	public void setPath(String value)
+	public Tool[] getTools()
 	{
-		path = value;
-	}
-	public void setClip(clip value)
-	{
-		clipfile = value;
-	}
-	public void setVideoProfile(VideoProfile value)
-	{
-		videofile = value;
-	}
-	public void setUpload(String value)
-	{
-		upload = value;
+		return filters;
 	}
 	public COMMAND getCommand() throws DataFormatException
 	{
-		if(type.equals("file"))
-			return COMMAND.FILE;
-		else if(type.equals("folder"))
+		if(action.equals("file_request"))
+			return COMMAND.FILE_REQUEST;
+		else if(action.equals("file_compile"))
+			return COMMAND.FILE_COMPILE;
+		else if(action.equals("upload"))
+			return COMMAND.UPLOAD;
+		else if(action.equals("folder"))
 			return COMMAND.FOLDER;
-		else if(type.equals("status"))
+		else if(action.equals("status"))
 			return COMMAND.STATUS;
-		else if(type.equals("action"))
+		else if(action.equals("action"))
 			return COMMAND.ACTION;
 		else
 			throw new DataFormatException("invalid message type: expected file, status, or action");
 	}
-	public String getPath()
-	{
-		return path;
+	public FileInput[] getFiles() {
+		return files;
 	}
-	public String getDescription() throws DataFormatException
-	{
-		if(getCommand() == COMMAND.FILE)
-			return "get: "+getPath();
-		else if(getCommand() == COMMAND.FOLDER)
-			return "get: "+getPath();
-		else if(getCommand() == COMMAND.STATUS)
-			return "get: status";
-		else if(getCommand() == COMMAND.ACTION)
-			return "DO";
-		else
-			return "Did nothing, bad command: "+type;
-	}
-	public clip getClip()
-	{
-		return clipfile;
-	}
-	public VideoProfile getVideoProfile()
-	{
-		return videofile;
-	}
-	public String getUpload()
-	{
-		return upload;
-	}
+	public void setFiles(FileInput[] files) {
+		this.files = files;
+	}/* TODO evenually remove this
 	public static class clip
 	{
 		private int height;
@@ -120,5 +91,5 @@ public class Message
 		public void setStart(String start) {
 			this.start = start;
 		}
-	}
+	}*/
 }

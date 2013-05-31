@@ -71,9 +71,19 @@ public class AudioProfile extends Profile implements Serializable
 		super.setDuration(hour, minute, second);
 		settings.add(PROFILESETTINGS.DURATION);
 	}
+	public void setDuration(double time)
+	{
+		super.setDuration(time);
+		settings.add(PROFILESETTINGS.DURATION);
+	}
 	public void setStart(int hour,int minute,int second)
 	{
 		super.setStart(hour, minute, second);
+		settings.add(PROFILESETTINGS.START);
+	}
+	public void setStart(double time)
+	{
+		super.setStart(time);
 		settings.add(PROFILESETTINGS.START);
 	}
 	public ArrayList<String> getCommands()
@@ -96,5 +106,21 @@ public class AudioProfile extends Profile implements Serializable
 			output.addAll(getCodecCommand());
 		
 		return output;
+	}
+	public ArrayList<String> getHashValues()
+	{
+		ArrayList<String> values = new ArrayList<String>();
+		values.add(getExtension());
+		values.add(getChannels());
+		values.add(Integer.toString(getSampleRate()));
+		values.add(getStart());
+		values.add(getDuration());
+		
+		return values;
+	}
+	@Override
+	public String getFilter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -3,13 +3,16 @@ package video;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Profile implements Serializable
+import video.VideoProfile.PROFILESETTINGS;
+
+public abstract class Profile implements Serializable
 {
 	protected int bitrate;
 	private String duration;
 	private String start;
 	protected String codec;
 	private String extension;
+	private ArrayList<String> filters;
 	public Profile()
 	{
 	}
@@ -21,9 +24,43 @@ public class Profile implements Serializable
 	{
 		duration = hour+":"+minute+":"+Math.round(second);
 	}
+	public void setDuration(double time)
+	{
+		double temp1 = time/60;
+		if(temp1 >= 60)
+		{
+			double temp2 = temp1/60;
+			int hr = (int) Math.floor(temp2);
+			double inter = (temp2 - hr)*60;
+			int min = (int) Math.floor(inter);
+			setDuration(hr, min, (inter-min)*60);
+		}
+		else
+		{
+			int min = (int) Math.floor(temp1);
+			setDuration(0, min, (temp1-min)*60);
+		}
+	}
 	public void setStart(int hour,int minute,double second)
 	{
 		start = hour+":"+minute+":"+Math.round(second);
+	}
+	public void setStart(double time)
+	{
+		double temp1 = time/60;
+		if(temp1 >= 60)
+		{
+			double temp2 = temp1/60;
+			int hr = (int) Math.floor(temp2);
+			double inter = (temp2 - hr)*60;
+			int min = (int) Math.floor(inter);
+			setStart(hr, min, (inter-min)*60);
+		}
+		else
+		{
+			int min = (int) Math.floor(temp1);
+			setStart(0, min, (temp1-min)*60);
+		}
 	}
 	public void setCodec(String value)
 	{
@@ -32,6 +69,10 @@ public class Profile implements Serializable
 	public void setExtension(String value)
 	{
 		extension = value;
+	}
+	public void addFilter(String value)
+	{
+		filters.add(value);
 	}
 	public ArrayList<String> getBitRateCommand()
 	{
@@ -90,6 +131,7 @@ public class Profile implements Serializable
 	{
 		return start;
 	}
+	public abstract String getFilter();
 	public static int getHours(String time)
 	{
 		String[] temp = time.split(":");
@@ -120,4 +162,5 @@ public class Profile implements Serializable
 		else
 			return false;
 	}
+	public abstract ArrayList<String> getHashValues();
 }

@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.Callable;
 
 import json_objects.Stream;
 
@@ -18,29 +18,35 @@ import video.OutputLogs.ACTION;
 public class SourceFile implements Serializable
 {
 	private String file;
-	private ArrayList<SourceFile> converted;
+	//private ArrayList<SourceFile> converted;
+	private HashMap<ArrayList<String>,SourceFile> converted;
 	private VideoProfile profile;
 	private String folderpath;
 	private boolean update;
 	private int filecount;
 	private Properties settings;
+	private SourceFile parent;
 	public SourceFile(String file,Properties settings)
 	{
-		converted = new ArrayList<SourceFile>();
+		converted = new HashMap<ArrayList<String>,SourceFile>();
 		profile = new VideoProfile();
 		this.file = file;
 		update = true;
 		setFolderPath("\\");
 		filecount = 0;
 		this.settings = settings;
+		parent = null;
 		setValues();
 	}
-	public SourceFile(String file, boolean ischild,Properties settings)
+	public SourceFile(String file, boolean ischild,Properties settings,SourceFile parent)
 	{
 		if(ischild == true)
+		{
 			converted = null;
+			this.parent = parent;
+		}
 		else
-			converted = new ArrayList<SourceFile>();
+			converted = new HashMap<ArrayList<String>,SourceFile>();
 		
 		profile = new VideoProfile();
 		this.file = file;
@@ -80,11 +86,15 @@ public class SourceFile implements Serializable
 		else
 			return false;
 	}
+	public SourceFile getParent()
+	{
+		return parent;
+	}
 	public VideoProfile getVideoProfile()
 	{
 		return profile;
 	}
-	public ArrayList<SourceFile> getChildren()
+	public HashMap<ArrayList<String>,SourceFile> getChildren()
 	{
 		return converted;
 	}
@@ -103,10 +113,11 @@ public class SourceFile implements Serializable
 		String temp = settings.getProperty("CONVERTED") + getFolderPath() + "\\temp"+(filecount++)+ "."+profile.getExtension();
 		VideoClip clip = new VideoClip(file,settings,temp,profile);
 		clip.run();
-		SourceFile value = new SourceFile(clip.getOutputFiles().get(0),true,settings);
+		SourceFile value = new SourceFile(clip.getOutputFiles().get(0),true,settings,this);
 		String startv = profile.getStart();
 		value.getVideoProfile().setStart(Profile.getHours(startv),Profile.getMinutes(startv),Profile.getSeconds(startv));
-		converted.add(value);
+		converted.put(value.getVideoProfile().getHashValues(), value);
+		//add(value);
 		update = true;
 		return value;
 	}

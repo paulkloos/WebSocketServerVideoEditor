@@ -38,20 +38,7 @@ public class VideoProfile extends Profile implements Serializable
 	}
 	public void setDuration(double time)
 	{
-		double temp1 = time/60;
-		if(temp1 >= 60)
-		{
-			double temp2 = temp1/60;
-			int hr = (int) Math.floor(temp2);
-			double inter = (temp2 - hr)*60;
-			int min = (int) Math.floor(inter);
-			super.setDuration(hr, min, (inter-min)*60);
-		}
-		else
-		{
-			int min = (int) Math.floor(temp1);
-			super.setDuration(0, min, (temp1-min)*60);
-		}
+		super.setDuration(time);
 		settings.add(PROFILESETTINGS.DURATION);
 	}
 	public void setStart(int hour,int minute,int second)
@@ -61,20 +48,7 @@ public class VideoProfile extends Profile implements Serializable
 	}
 	public void setStart(double time)
 	{
-		double temp1 = time/60;
-		if(temp1 >= 60)
-		{
-			double temp2 = temp1/60;
-			int hr = (int) Math.floor(temp2);
-			double inter = (temp2 - hr)*60;
-			int min = (int) Math.floor(inter);
-			super.setStart(hr, min, (inter-min)*60);
-		}
-		else
-		{
-			int min = (int) Math.floor(temp1);
-			super.setStart(0, min, (temp1-min)*60);
-		}
+		super.setStart(time);
 		settings.add(PROFILESETTINGS.START);
 	}
 	public void setPass(ENCODEPASS value)
@@ -114,6 +88,10 @@ public class VideoProfile extends Profile implements Serializable
 		output.add("-pass:v");
 		output.add(String.valueOf(pass));
 		return output;
+	}
+	public int getPass()
+	{
+		return pass;
 	}
 	public ArrayList<String> getAspectCommand()
 	{
@@ -209,5 +187,10 @@ public class VideoProfile extends Profile implements Serializable
 		values.add(getDuration());
 		
 		return values;
+	}
+	@Override
+	public String getFilter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
