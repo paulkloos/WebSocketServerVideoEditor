@@ -49,7 +49,7 @@ public class HTTPConnection extends WebSocketServer
 		files = ref;
 		upload = new LinkedList<Message>();
 		send = new SendQueue();
-		manager = new VideoManager(files);
+		manager = new VideoManager(files,send);
 	}
 	
 	public HTTPConnection(InetSocketAddress address,SourceFiles ref)
@@ -61,7 +61,7 @@ public class HTTPConnection extends WebSocketServer
 		files = ref;
 		upload = new LinkedList<Message>();
 		send = new SendQueue();
-		manager = new VideoManager(files);
+		manager = new VideoManager(files,send);
 	}
 
 	public void onClose(WebSocket conn, int code, String reason, boolean remote)
@@ -96,7 +96,7 @@ public class HTTPConnection extends WebSocketServer
 					JsonElement element = new Gson().toJsonTree(list);
 					sendText(conn,element.toString());
 				}
-				manager.processList(command);
+				manager.processList(command,conn);
 				/*else
 				{
 					String[] parts2 = command.getPath()[0].split("\\\\");

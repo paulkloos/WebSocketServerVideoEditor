@@ -188,9 +188,4 @@ public class VideoProfile extends Profile implements Serializable
 		
 		return values;
 	}
-	@Override
-	public String getFilter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

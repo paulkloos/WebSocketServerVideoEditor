@@ -3,8 +3,6 @@ package video;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import video.VideoProfile.PROFILESETTINGS;
-
 public abstract class Profile implements Serializable
 {
 	protected int bitrate;
@@ -12,7 +10,6 @@ public abstract class Profile implements Serializable
 	private String start;
 	protected String codec;
 	private String extension;
-	private ArrayList<String> filters;
 	public Profile()
 	{
 	}
@@ -69,10 +66,6 @@ public abstract class Profile implements Serializable
 	public void setExtension(String value)
 	{
 		extension = value;
-	}
-	public void addFilter(String value)
-	{
-		filters.add(value);
 	}
 	public ArrayList<String> getBitRateCommand()
 	{
@@ -131,7 +124,6 @@ public abstract class Profile implements Serializable
 	{
 		return start;
 	}
-	public abstract String getFilter();
 	public static int getHours(String time)
 	{
 		String[] temp = time.split(":");

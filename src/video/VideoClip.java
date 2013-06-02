@@ -13,6 +13,7 @@ public class VideoClip implements Runnable
 	private Properties settings;
 	private InputFiles ifiles;
 	private OutputFiles ofiles;
+	private String filter;
 	public VideoClip(String input,Properties value,String output, VideoProfile pro)
 	{
 		settings = value;
@@ -21,8 +22,16 @@ public class VideoClip implements Runnable
 		ifiles.addFile(input);
 		ofiles.addFile(output);
 		profile = pro;
+		filter = null;
 	}
-
+	public void setFilter(String value)
+	{
+		filter = value;
+	}
+	private String getFilterCommand()
+	{
+		return "-vf \""+filter+"\"";
+	}
 	public VideoProfile getProfile()
 	{
 		return profile;
@@ -47,6 +56,9 @@ public class VideoClip implements Runnable
 		//commands.addAll(profile.getInputCommands());
 		commands.addAll(ifiles.getCommand());
 		commands.addAll(profile.getCommands());
+		if(filter != null)
+			commands.add(this.getFilterCommand());
+		
 		commands.addAll(ofiles.getCommand());
 		
 		builder.command(commands);

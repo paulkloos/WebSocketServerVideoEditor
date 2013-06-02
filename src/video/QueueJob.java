@@ -1,8 +1,5 @@
 package video;
 
-
-import json_objects.Parent;
-
 import org.java_websocket.WebSocket;
 
 public class QueueJob
@@ -13,22 +10,19 @@ public class QueueJob
 	private SourceFile source;
 	private Profile profile;
 	private boolean ready;
-	private Parent header;
-	public QueueJob(WebSocket con, String path, json_objects.File info,Parent header)
+	public QueueJob(WebSocket con, String path, json_objects.File info)
 	{
 		connection = con;
 		file = path;
 		fileinfo = info;
 		ready = true;
-		this.header = header;
 	}
-	public QueueJob(WebSocket con, SourceFile source, Profile info, Parent header)
+	public QueueJob(WebSocket con, SourceFile source, Profile info)
 	{
 		connection = con;
 		this.source = source;
 		profile = info;
 		ready = false;	
-		this.header = header;
 	}
 	public boolean getReady()
 	{
@@ -53,9 +47,5 @@ public class QueueJob
 	public SourceFile getSource()
 	{
 		return source;
-	}
-	public Parent getHeader()
-	{
-		return header;
 	}
 }

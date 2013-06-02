@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Tool
 {
+	public enum STATE{ZERO(0),ONE(1);
+	private final int value;
+	STATE(int value){this.value = value;}
+	public int getValue(){return value;}
+	}
 	protected ArrayList<String> input;
 	protected ArrayList<String> output;
 

@@ -44,52 +44,5 @@ public class Message
 	}
 	public void setFiles(FileInput[] files) {
 		this.files = files;
-	}/* TODO evenually remove this
-	public static class clip
-	{
-		private int height;
-		private int width;
-		private String format;
-		private String split;
-		private String start;
-		public void setheight(int value)
-		{
-			height = value;
-		}
-		public void setWidth(int value)
-		{
-			width = value;
-		}
-		public void setFormat(String value)
-		{
-			format = value;
-		}
-		public int getHeight()
-		{
-			return height;
-		}
-		public int getWidth()
-		{
-			return width;
-		}
-		public String getFormat()
-		{
-			return format;
-		}
-		public String getSplit() {
-			return split;
-		}
-		public void setSplit(String split) {
-			this.split = split;
-		}
-		public String getStart() {
-			if(start == null)
-				return "00:00:00";
-			else
-				return start;
-		}
-		public void setStart(String start) {
-			this.start = start;
-		}
-	}*/
+	}
 }

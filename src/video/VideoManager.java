@@ -2,11 +2,20 @@ package video;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.zip.DataFormatException;
 
+import org.java_websocket.WebSocket;
+
+import com.google.gson.Gson;
+
+import server.HTTPConnection;
 import server.SourceFiles;
 
 import json_objects.FileInput;
 import json_objects.Message;
+import json_objects.FileInput.TYPE;
+import json_objects.Message.COMMAND;
+import json_objects.Parent;
 import json_objects.tools.Tool;
 
 public class VideoManager
@@ -15,12 +24,16 @@ public class VideoManager
 	private FileInput[] filelist;
 	private SourceFiles files;
 	private ArrayList<String> filters;
-	public VideoManager(SourceFiles value)
+	private SendQueue send;
+	private Gson inobject;
+	public VideoManager(SourceFiles value, SendQueue queue)
 	{
 		files = value;
 		filters = new ArrayList<String>();
+		send = queue;
+		inobject = new Gson();
 	}
-	public void processList(Message request)
+	public void processList(Message request, WebSocket conn)
 	{
 		toollist = request.getTools();
 		for(int x = 0; x < toollist.length; x++)
@@ -69,16 +82,74 @@ public class VideoManager
 			}
 			HashMap<ArrayList<String>,SourceFile> children = file.getChildren();
 			ArrayList<VideoProfile> maplist = new ArrayList<VideoProfile>(map.values());
+			Parent p;
+			String json;
 			for(int index = 0; index < maplist.size(); index++)
-			{//TODO fix the loose ends
+			{
 				SourceFile item = children.get(maplist.get(index).getHashValues());
-				//TODO split between network and local here
-				if(item != null)
-				;//	send.add(conn, children.get(index).getAbsoluteFile(), new json_objects.File("clip", file.getRelativeFile(), children.get(index).getFileName(), item.getVideoProfile().getStart(), item.getVideoProfile().getDuration()));
-				else
-				;//	send.add(conn, file, maplist.get(index));
+				try {
+					if(item != null)
+					{
+						if(request.getCommand() == COMMAND.FILE_COMPILE)
+						{
+							String temp = files.getSettings().getProperty("ROOT") + this.getOutputFile();
+							VideoClip clip = new VideoClip(filelist[x].getFile(),files.getSettings(),temp,item.getVideoProfile());
+							clip.setFilter(this.getFilters());
+							clip.run();
+						}
+						else if(request.getCommand() == COMMAND.FILE_REQUEST)
+						{//sends parent file header then queues up file
+							p = new Parent(file.getRelativeFile(),file.getVideoProfile().getDuration(),file.getVideoProfile().getDuration());
+							json = inobject.toJson(p);
+							HTTPConnection.sendText(conn,json);
+							send.add(conn, children.get(index).getAbsoluteFile(), new json_objects.File("clip", file.getRelativeFile(), children.get(index).getFileName(), item.getVideoProfile().getStart(), item.getVideoProfile().getDuration()));
+						}
+						
+					}
+					else
+					{
+						
+						if(request.getCommand() == COMMAND.FILE_COMPILE)
+						{
+							String temp = files.getSettings().getProperty("ROOT") + this.getOutputFile();
+							VideoClip clip = new VideoClip(filelist[x].getFile(),files.getSettings(),temp,maplist.get(index));
+							clip.setFilter(this.getFilters());
+							clip.run();
+						}
+						else if(request.getCommand() == COMMAND.FILE_REQUEST)
+						{//sends parent file header then queues up file
+							p = new Parent(file.getRelativeFile(),file.getVideoProfile().getDuration(),file.getVideoProfile().getDuration());
+							json = inobject.toJson(p);
+							HTTPConnection.sendText(conn,json);
+							send.add(conn, file, maplist.get(index));
+						}
+					}
+				} catch (DataFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-
+	private String getOutputFile()
+	{
+		String file = null;
+		for(int x = 0; x < filelist.length && file == null; x++)
+			if(filelist[x].getType() == TYPE.OUT)
+				file = filelist[x].getFile();
+		
+		return file;
+	}
+	private String getFilters()
+	{
+		String temp = null;
+		for(int x = 0; x < filters.size(); x++)
+		{
+			if(x == 0)
+				temp = filters.get(x);
+			else
+				temp += "; "+filters.get(x);
+		}
+		return temp;
+	}
 }

@@ -9,12 +9,7 @@ import java.nio.channels.NotYetConnectedException;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import json_objects.Parent;
-
-
 import org.java_websocket.WebSocket;
-
-import server.HTTPConnection;
 
 import com.google.gson.Gson;
 
@@ -28,14 +23,14 @@ public class SendQueue implements Runnable
 		jobs = new LinkedList<QueueJob>();
 		inobject = new Gson();
 	}
-	public void add(WebSocket conn,String path,json_objects.File info,Parent parent)
+	public void add(WebSocket conn,String path,json_objects.File info)
 	{
-		QueueJob temp = new QueueJob(conn,path,info,parent);
+		QueueJob temp = new QueueJob(conn,path,info);
 		jobs.add(temp);
 	}
-	public void add(WebSocket conn, SourceFile source,Profile info, Parent parent)
+	public void add(WebSocket conn, SourceFile source,Profile info)
 	{
-		QueueJob temp = new QueueJob(conn,source,info,parent);
+		QueueJob temp = new QueueJob(conn,source,info);
 		jobs.add(temp);
 	}
 	private void sendFile(WebSocket conn,String path,json_objects.File info)
@@ -76,21 +71,16 @@ public class SendQueue implements Runnable
 	}
 	@Override
 	public void run() {
-		String json;
 		while(jobs.size() > 0)
 		{
 			if(jobs.peek().getReady() == true)
 			{
 				QueueJob temp = jobs.poll();
-				json = inobject.toJson(temp.getHeader());
-				HTTPConnection.sendText(temp.getConnection(),json);//TODO only gets send once, move to video manager
 				sendFile(temp.getConnection(),temp.getFile(),temp.getFileInfo());
 			}
 			else
 			{
 				QueueJob temp = jobs.poll();
-				json = inobject.toJson(temp.getHeader());
-				HTTPConnection.sendText(temp.getConnection(),json);
 				try {
 					SourceFile source = temp.getSource().createChild((VideoProfile) temp.getProfile());
 					sendFile(temp.getConnection(),source.getAbsoluteFile(),new json_objects.File("clip",temp.getSource().getRelativeFile(), source.getFileName(), source.getVideoProfile().getStart(), source.getVideoProfile().getDuration()));
