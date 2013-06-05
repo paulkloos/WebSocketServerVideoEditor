@@ -21,6 +21,10 @@ public abstract class Profile implements Serializable
 	{
 		duration = hour+":"+minute+":"+Math.round(second);
 	}
+	/*!
+	 * Function: setDuration
+	 * \param double time
+	 */
 	public void setDuration(double time)
 	{
 		double temp1 = time/60;
@@ -38,6 +42,12 @@ public abstract class Profile implements Serializable
 			setDuration(0, min, (temp1-min)*60);
 		}
 	}
+	/*!
+	 * Function: setStart
+	 * \param int hour
+	 * \param int minue
+	 * \param double second
+	 */
 	public void setStart(int hour,int minute,double second)
 	{
 		start = hour+":"+minute+":"+Math.round(second);

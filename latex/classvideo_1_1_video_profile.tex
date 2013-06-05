@@ -1,0 +1,196 @@
+\hypertarget{classvideo_1_1_video_profile}{
+\section{video.VideoProfile Class Reference}
+\label{classvideo_1_1_video_profile}\index{video::VideoProfile@{video::VideoProfile}}
+}
+Inheritance diagram for video.VideoProfile:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classvideo_1_1_video_profile}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries PROFILESETTINGS} \{ \par
+{\bfseries BITRATE}, 
+{\bfseries DURATION}, 
+{\bfseries START}, 
+{\bfseries ASPECT}, 
+\par
+{\bfseries PASS}, 
+{\bfseries CODEC}, 
+{\bfseries DIMENSIONS}
+ \}
+\item 
+enum {\bfseries ENCODEPASS} \{ {\bfseries SINGLE} = (1), 
+{\bfseries DOUBLE} = (2)
+ \}
+\item 
+enum {\bfseries ASPECTRATIO} \{ {\bfseries WIDE} = (16/9), 
+{\bfseries FULL} = (4/3)
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvideo_1_1_video_profile_a45af74f7b83f89f90aab726db796047e}{
+void {\bfseries setBitRate} (int value)}
+\label{classvideo_1_1_video_profile_a45af74f7b83f89f90aab726db796047e}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a190e8832c69295b46dee9c34206645d8}{
+void {\bfseries setDuration} (int hour, int minute, int second)}
+\label{classvideo_1_1_video_profile_a190e8832c69295b46dee9c34206645d8}
+
+\item 
+void \hyperlink{classvideo_1_1_video_profile_a9aabb5f252d2fc467c74d3123864d94a}{setDuration} (double time)
+\item 
+\hypertarget{classvideo_1_1_video_profile_ae45387e20db1d9bdcfc4b415fbd5f03f}{
+void {\bfseries setStart} (int hour, int minute, int second)}
+\label{classvideo_1_1_video_profile_ae45387e20db1d9bdcfc4b415fbd5f03f}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a04d4b32f8f8634cb85d44a48a0bf4206}{
+void {\bfseries setStart} (double time)}
+\label{classvideo_1_1_video_profile_a04d4b32f8f8634cb85d44a48a0bf4206}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a830cf2659e50fe7efbd43075e95099eb}{
+void {\bfseries setPass} (ENCODEPASS value)}
+\label{classvideo_1_1_video_profile_a830cf2659e50fe7efbd43075e95099eb}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a3c6a6649fd9541568642d2cc1d7e27e3}{
+void {\bfseries setAspect} (Double value)}
+\label{classvideo_1_1_video_profile_a3c6a6649fd9541568642d2cc1d7e27e3}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_ad15c71c642d956a6a86bdaed565fc6cc}{
+void {\bfseries setDimensions} (int h, int w)}
+\label{classvideo_1_1_video_profile_ad15c71c642d956a6a86bdaed565fc6cc}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a95ba1b3043ba85255ec3d4f06c96cc86}{
+void {\bfseries setCodec} (String value)}
+\label{classvideo_1_1_video_profile_a95ba1b3043ba85255ec3d4f06c96cc86}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a46c05dc58b177b83356823f6cac11aaf}{
+\hyperlink{classvideo_1_1_audio_profile}{AudioProfile} {\bfseries getAudio} ()}
+\label{classvideo_1_1_video_profile_a46c05dc58b177b83356823f6cac11aaf}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a53754b5c05e875826f8929217d2b11c7}{
+ArrayList$<$ String $>$ {\bfseries getBitRateCommand} ()}
+\label{classvideo_1_1_video_profile_a53754b5c05e875826f8929217d2b11c7}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_aa2683fb200af906a6328a219bb2ae248}{
+ArrayList$<$ String $>$ {\bfseries getPassCommand} ()}
+\label{classvideo_1_1_video_profile_aa2683fb200af906a6328a219bb2ae248}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_ac0ccef7d4ceece3106374cd1bacbca0f}{
+int {\bfseries getPass} ()}
+\label{classvideo_1_1_video_profile_ac0ccef7d4ceece3106374cd1bacbca0f}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a94541cda8a04be32e8a5ade88fefce86}{
+ArrayList$<$ String $>$ {\bfseries getAspectCommand} ()}
+\label{classvideo_1_1_video_profile_a94541cda8a04be32e8a5ade88fefce86}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_ae97a3876b5b3e58615f8519d97349ee8}{
+Double {\bfseries getAspect} ()}
+\label{classvideo_1_1_video_profile_ae97a3876b5b3e58615f8519d97349ee8}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_af8fe2807d7c04a9afbe3cdd4932c46d0}{
+ArrayList$<$ String $>$ {\bfseries getCodecCommand} ()}
+\label{classvideo_1_1_video_profile_af8fe2807d7c04a9afbe3cdd4932c46d0}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a7c79a0d46880abb1b011fff4cd8b5b88}{
+String {\bfseries getCodec} ()}
+\label{classvideo_1_1_video_profile_a7c79a0d46880abb1b011fff4cd8b5b88}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a05df9200386550ecd0cdd9beb2c4ccd3}{
+ArrayList$<$ String $>$ {\bfseries getDimensionCommand} ()}
+\label{classvideo_1_1_video_profile_a05df9200386550ecd0cdd9beb2c4ccd3}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a84dd5a89a5d11b8f8b302dbdbd07027b}{
+int {\bfseries getHeight} ()}
+\label{classvideo_1_1_video_profile_a84dd5a89a5d11b8f8b302dbdbd07027b}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_ada2da6089e10d68098a275e001034945}{
+int {\bfseries getWidth} ()}
+\label{classvideo_1_1_video_profile_ada2da6089e10d68098a275e001034945}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a24539e1cdfce5b4444708cce47695f5d}{
+void {\bfseries removeSetting} (PROFILESETTINGS value)}
+\label{classvideo_1_1_video_profile_a24539e1cdfce5b4444708cce47695f5d}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_aaa394240d8b71b32ef180bbefe6e8552}{
+ArrayList$<$ String $>$ {\bfseries getCommands} ()}
+\label{classvideo_1_1_video_profile_aaa394240d8b71b32ef180bbefe6e8552}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_ae032730f51a6a1121589539511fb2c07}{
+ArrayList$<$ String $>$ {\bfseries getInputCommands} ()}
+\label{classvideo_1_1_video_profile_ae032730f51a6a1121589539511fb2c07}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_a750f39d45c3ca8af3fb9341bfea3c8c5}{
+boolean {\bfseries equals} (Object obj)}
+\label{classvideo_1_1_video_profile_a750f39d45c3ca8af3fb9341bfea3c8c5}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_af67afe451da07cfc619564e0dc36bd06}{
+ArrayList$<$ String $>$ {\bfseries getHashValues} ()}
+\label{classvideo_1_1_video_profile_af67afe451da07cfc619564e0dc36bd06}
+
+\end{DoxyCompactItemize}
+\subsection*{Package Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvideo_1_1_video_profile_a2632b6ca98196ddef1048150828df1a6}{
+int {\bfseries height}}
+\label{classvideo_1_1_video_profile_a2632b6ca98196ddef1048150828df1a6}
+
+\item 
+\hypertarget{classvideo_1_1_video_profile_af5cdeb2dd7f2febe6f3eb4b58788257a}{
+int {\bfseries width}}
+\label{classvideo_1_1_video_profile_af5cdeb2dd7f2febe6f3eb4b58788257a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classvideo_1_1_video_profile_a9aabb5f252d2fc467c74d3123864d94a}{
+\index{video::VideoProfile@{video::VideoProfile}!setDuration@{setDuration}}
+\index{setDuration@{setDuration}!video::VideoProfile@{video::VideoProfile}}
+\subsubsection[{setDuration}]{\setlength{\rightskip}{0pt plus 5cm}void video.VideoProfile.setDuration (
+\begin{DoxyParamCaption}
+\item[{double}]{time}
+\end{DoxyParamCaption}
+)}}
+\label{classvideo_1_1_video_profile_a9aabb5f252d2fc467c74d3123864d94a}
+Function: setDuration 
+\begin{DoxyParams}{Parameters}
+{\em double} & time \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classvideo_1_1_profile_a2272c75453c3b9d64ff63a43ed1f1e84}{video.Profile}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/video/VideoProfile.java\end{DoxyCompactItemize}

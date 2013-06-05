@@ -7,9 +7,15 @@ public class Overlay extends Tool
 	FORMAT(String value){this.value = value;}
 	public String getValue(){return value;}
 	}
+	public enum EVAL{INIT("init"),FRAME("frame");
+	private final String value;
+	EVAL(String value){this.value = value;}
+	public String getValue(){return value;}
+	}
 	private int x,y;
 	private STATE shortest,repeatlast;
 	private FORMAT format;
+	private EVAL eval;
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -60,6 +66,14 @@ public class Overlay extends Tool
 
 	public void setFormat(FORMAT format) {
 		this.format = format;
+	}
+
+	public EVAL getEval() {
+		return eval;
+	}
+
+	public void setEval(EVAL eval) {
+		this.eval = eval;
 	}
 
 }
