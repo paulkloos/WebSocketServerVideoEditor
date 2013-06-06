@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Properties;
 
 import video.OutputLogs.ACTION;
-
+//! \details Runs and manages FFMPEG execution
 public class VideoClip implements Runnable
 {
 	private VideoProfile profile;
@@ -44,6 +44,12 @@ public class VideoClip implements Runnable
 	{
 		return ofiles.getFileList();
 	}
+	/*!
+	 * Function: run
+	 * \details builds FFMPEG command and runs it
+	 * (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run()
 	{
 		Process p;

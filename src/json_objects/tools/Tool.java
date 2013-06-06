@@ -1,7 +1,7 @@
 package json_objects.tools;
 
 import java.util.ArrayList;
-
+//! \details base class for filters
 public abstract class Tool
 {
 	public enum STATE{ZERO(0),ONE(1);

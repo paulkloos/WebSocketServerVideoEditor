@@ -2,7 +2,6 @@ package json_objects.tools;
 
 import java.lang.reflect.Type;
 
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -11,8 +10,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-
-
+//! Credit for this code goes to http://ovaraksin.blogspot.com/2011/05/json-with-gson-and-abstract-classes.html
+//! \details Allows Gson to use the correct child class of Tool
 public class ToolAdapter implements JsonSerializer<Tool>, JsonDeserializer<Tool> {
 
 	@Override
@@ -29,7 +28,6 @@ public class ToolAdapter implements JsonSerializer<Tool>, JsonDeserializer<Tool>
 			throw new JsonParseException("Unknown element type: json_objects.tools."+ type,excep);
 		}
 	}
-
 	@Override
 	public JsonElement serialize(Tool src, Type typeofsrc,
 			JsonSerializationContext context) {

@@ -83,10 +83,8 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>onClose</b> (WebSocket conn, int code, String reason, boolean remote)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a699cc6eb5d0a1dc647effe6e9b1b13b2"></a><!-- doxytag: member="server::HTTPConnection::onError" ref="a699cc6eb5d0a1dc647effe6e9b1b13b2" args="(WebSocket conn, Exception ex)" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><b>onError</b> (WebSocket conn, Exception ex)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ac455ab0f398241c6eb43a321652d5c"></a><!-- doxytag: member="server::HTTPConnection::onMessage" ref="a5ac455ab0f398241c6eb43a321652d5c" args="(final WebSocket conn, String inmessage)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>onMessage</b> (final WebSocket conn, String inmessage)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b2a63779c960e53a0f97967f0ac0662"></a><!-- doxytag: member="server::HTTPConnection::onMessage" ref="a0b2a63779c960e53a0f97967f0ac0662" args="(final WebSocket conn, ByteBuffer blob)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>onMessage</b> (final WebSocket conn, ByteBuffer blob)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserver_1_1_h_t_t_p_connection.html#a5ac455ab0f398241c6eb43a321652d5c">onMessage</a> (final WebSocket conn, String inmessage)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classserver_1_1_h_t_t_p_connection.html#a0b2a63779c960e53a0f97967f0ac0662">onMessage</a> (final WebSocket conn, ByteBuffer blob)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68c699873f67716b86e168fd824c15ed"></a><!-- doxytag: member="server::HTTPConnection::onOpen" ref="a68c699873f67716b86e168fd824c15ed" args="(WebSocket conn, ClientHandshake handshake)" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><b>onOpen</b> (WebSocket conn, ClientHandshake handshake)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
@@ -94,6 +92,83 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2be7a6b81a253ccf360ec91e11d2f38"></a><!-- doxytag: member="server::HTTPConnection::sendText" ref="aa2be7a6b81a253ccf360ec91e11d2f38" args="(WebSocket conn, String message)" -->
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>sendText</b> (WebSocket conn, String message)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>handles server connection </p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a0b2a63779c960e53a0f97967f0ac0662"></a><!-- doxytag: member="server::HTTPConnection::onMessage" ref="a0b2a63779c960e53a0f97967f0ac0662" args="(final WebSocket conn, ByteBuffer blob)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void server.HTTPConnection.onMessage </td>
+          <td>(</td>
+          <td class="paramtype">final WebSocket&#160;</td>
+          <td class="paramname"><em>conn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ByteBuffer&#160;</td>
+          <td class="paramname"><em>blob</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Function: onMessage </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">WebSocket</td><td>conn </td></tr>
+    <tr><td class="paramname">ByteBuffer</td><td>blob</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>handles data coming in for file upload (non-Javadoc) </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>org.java_websocket.WebSocketServer.onMessage(org.java_websocket.WebSocket, java.nio.ByteBuffer) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5ac455ab0f398241c6eb43a321652d5c"></a><!-- doxytag: member="server::HTTPConnection::onMessage" ref="a5ac455ab0f398241c6eb43a321652d5c" args="(final WebSocket conn, String inmessage)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void server.HTTPConnection.onMessage </td>
+          <td>(</td>
+          <td class="paramtype">final WebSocket&#160;</td>
+          <td class="paramname"><em>conn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>inmessage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Function: onMessage </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">WebSocket</td><td>conn </td></tr>
+    <tr><td class="paramname">String</td><td>inmessage</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>handles in coming String based message (non-Javadoc) </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>org.java_websocket.WebSocketServer.onMessage(org.java_websocket.WebSocket, java.lang.String) </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/server/HTTPConnection.java</li>
 </ul>
@@ -112,7 +187,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>sendText</b> (
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jun 5 2013 01:16:05 for WebSocket ServerVideo Editor by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 6 2013 16:37:17 for WebSocket ServerVideo Editor by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

@@ -33,6 +33,12 @@ public class VideoManager
 		send = queue;
 		inobject = new Gson();
 	}
+	/*!
+	 * Function: processList
+	 * \param Message request
+	 * \param WebSocket conn
+	 * \details Processes video process requests
+	 */
 	public void processList(Message request, WebSocket conn)
 	{
 		toollist = request.getTools();
@@ -140,6 +146,11 @@ public class VideoManager
 		
 		return file;
 	}
+	/*!
+	 * Function: getFilters
+	 * \return String
+	 * \details appends filters
+	 */
 	private String getFilters()
 	{
 		String temp = null;

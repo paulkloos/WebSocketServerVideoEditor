@@ -25,15 +25,9 @@ void {\bfseries onError} (WebSocket conn, Exception ex)}
 \label{classserver_1_1_h_t_t_p_connection_a699cc6eb5d0a1dc647effe6e9b1b13b2}
 
 \item 
-\hypertarget{classserver_1_1_h_t_t_p_connection_a5ac455ab0f398241c6eb43a321652d5c}{
-void {\bfseries onMessage} (final WebSocket conn, String inmessage)}
-\label{classserver_1_1_h_t_t_p_connection_a5ac455ab0f398241c6eb43a321652d5c}
-
+void \hyperlink{classserver_1_1_h_t_t_p_connection_a5ac455ab0f398241c6eb43a321652d5c}{onMessage} (final WebSocket conn, String inmessage)
 \item 
-\hypertarget{classserver_1_1_h_t_t_p_connection_a0b2a63779c960e53a0f97967f0ac0662}{
-void {\bfseries onMessage} (final WebSocket conn, ByteBuffer blob)}
-\label{classserver_1_1_h_t_t_p_connection_a0b2a63779c960e53a0f97967f0ac0662}
-
+void \hyperlink{classserver_1_1_h_t_t_p_connection_a0b2a63779c960e53a0f97967f0ac0662}{onMessage} (final WebSocket conn, ByteBuffer blob)
 \item 
 \hypertarget{classserver_1_1_h_t_t_p_connection_a68c699873f67716b86e168fd824c15ed}{
 void {\bfseries onOpen} (WebSocket conn, ClientHandshake handshake)}
@@ -48,6 +42,52 @@ static void {\bfseries sendText} (WebSocket conn, String message)}
 \label{classserver_1_1_h_t_t_p_connection_aa2be7a6b81a253ccf360ec91e11d2f38}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+handles server connection 
+
+\subsection{Member Function Documentation}
+\hypertarget{classserver_1_1_h_t_t_p_connection_a0b2a63779c960e53a0f97967f0ac0662}{
+\index{server::HTTPConnection@{server::HTTPConnection}!onMessage@{onMessage}}
+\index{onMessage@{onMessage}!server::HTTPConnection@{server::HTTPConnection}}
+\subsubsection[{onMessage}]{\setlength{\rightskip}{0pt plus 5cm}void server.HTTPConnection.onMessage (
+\begin{DoxyParamCaption}
+\item[{final WebSocket}]{conn, }
+\item[{ByteBuffer}]{blob}
+\end{DoxyParamCaption}
+)}}
+\label{classserver_1_1_h_t_t_p_connection_a0b2a63779c960e53a0f97967f0ac0662}
+Function: onMessage 
+\begin{DoxyParams}{Parameters}
+{\em WebSocket} & conn \\
+\hline
+{\em ByteBuffer} & blob\\
+\hline
+\end{DoxyParams}
+handles data coming in for file upload (non-\/Javadoc) \begin{DoxySeeAlso}{See also}
+org.java\_\-websocket.WebSocketServer.onMessage(org.java\_\-websocket.WebSocket, java.nio.ByteBuffer) 
+\end{DoxySeeAlso}
+\hypertarget{classserver_1_1_h_t_t_p_connection_a5ac455ab0f398241c6eb43a321652d5c}{
+\index{server::HTTPConnection@{server::HTTPConnection}!onMessage@{onMessage}}
+\index{onMessage@{onMessage}!server::HTTPConnection@{server::HTTPConnection}}
+\subsubsection[{onMessage}]{\setlength{\rightskip}{0pt plus 5cm}void server.HTTPConnection.onMessage (
+\begin{DoxyParamCaption}
+\item[{final WebSocket}]{conn, }
+\item[{String}]{inmessage}
+\end{DoxyParamCaption}
+)}}
+\label{classserver_1_1_h_t_t_p_connection_a5ac455ab0f398241c6eb43a321652d5c}
+Function: onMessage 
+\begin{DoxyParams}{Parameters}
+{\em WebSocket} & conn \\
+\hline
+{\em String} & inmessage\\
+\hline
+\end{DoxyParams}
+handles in coming String based message (non-\/Javadoc) \begin{DoxySeeAlso}{See also}
+org.java\_\-websocket.WebSocketServer.onMessage(org.java\_\-websocket.WebSocket, java.lang.String) 
+\end{DoxySeeAlso}
 
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}

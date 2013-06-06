@@ -30,7 +30,7 @@ import com.google.gson.JsonElement;
 
 import video.SendQueue;
 import video.VideoManager;
-
+//! \details handles server connection
 public class HTTPConnection extends WebSocketServer
 {
 	private SourceFiles files;
@@ -73,7 +73,14 @@ public class HTTPConnection extends WebSocketServer
 	{
 		ex.printStackTrace();		
 	}
-
+	/*!
+	 * Function: onMessage
+	 * \param WebSocket conn
+	 * \param String inmessage
+	 * \details handles in coming String based message
+	 * (non-Javadoc)
+	 * @see org.java_websocket.WebSocketServer#onMessage(org.java_websocket.WebSocket, java.lang.String)
+	 */
 	public void onMessage(final WebSocket conn, String inmessage)
 	{
 		Message command;
@@ -97,7 +104,8 @@ public class HTTPConnection extends WebSocketServer
 					sendText(conn,element.toString());
 				}
 				manager.processList(command,conn);
-				/*else
+				/*TODO once all things are test to work, remove this code
+				 * else
 				{
 					String[] parts2 = command.getPath()[0].split("\\\\");
 					String path = "\\";
@@ -208,12 +216,20 @@ public class HTTPConnection extends WebSocketServer
 		}
 		
 	}
+	/*!
+	 * Function: onMessage
+	 * \param WebSocket conn
+	 * \param ByteBuffer blob
+	 * \details handles data coming in for file upload
+	 * (non-Javadoc)
+	 * @see org.java_websocket.WebSocketServer#onMessage(org.java_websocket.WebSocket, java.nio.ByteBuffer)
+	 */
 	public void onMessage(final WebSocket conn,ByteBuffer blob)
 	{
 		try {
 			Message header = upload.poll();
 			if(header == null)
-				throw new Exception("Recieved file without header");
+				throw new Exception("Recieved file without header");// a header is expected for all file uploads
 			
 			FileOutputStream out = new FileOutputStream(files.getSettings().getProperty("ROOT") + header.getFiles()[0].getFile());
 			FileChannel chout = out.getChannel();
@@ -234,7 +250,6 @@ public class HTTPConnection extends WebSocketServer
 	public void onOpen(WebSocket conn, ClientHandshake handshake)
 	{
 		System.out.println("Connection opened");
-		
 	}
 	static public void sendText(WebSocket conn,String message)
 	{

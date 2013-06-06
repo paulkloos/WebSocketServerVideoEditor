@@ -12,7 +12,7 @@ import java.util.Queue;
 import org.java_websocket.WebSocket;
 
 import com.google.gson.Gson;
-
+//! \details Manages sending data
 public class SendQueue implements Runnable
 {
 	Queue<QueueJob> jobs;
@@ -33,6 +33,13 @@ public class SendQueue implements Runnable
 		QueueJob temp = new QueueJob(conn,source,info);
 		jobs.add(temp);
 	}
+	/*!
+	 * Function: sendFile
+	 * \param WebSocket conn
+	 * \param String path
+	 * \param json_objects.File info
+	 * \details sends the header and then streams the data
+	 */
 	private void sendFile(WebSocket conn,String path,json_objects.File info)
 	{
 		try
@@ -69,17 +76,23 @@ public class SendQueue implements Runnable
 			e.printStackTrace();
 		}
 	}
+	/*!
+	 * Function: run
+	 * \details checks if next item in the list can be sent, then sends it, else create and send it
+	 * (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		while(jobs.size() > 0)
 		{
 			if(jobs.peek().getReady() == true)
-			{
+			{// file exists, send it
 				QueueJob temp = jobs.poll();
 				sendFile(temp.getConnection(),temp.getFile(),temp.getFileInfo());
 			}
 			else
-			{
+			{// file does not exist, create and send
 				QueueJob temp = jobs.poll();
 				try {
 					SourceFile source = temp.getSource().createChild((VideoProfile) temp.getProfile());

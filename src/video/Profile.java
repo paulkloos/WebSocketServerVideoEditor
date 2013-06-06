@@ -2,7 +2,7 @@ package video;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+//! \details Parent class for describing a media file
 public abstract class Profile implements Serializable
 {
 	protected int bitrate;
@@ -17,6 +17,12 @@ public abstract class Profile implements Serializable
 	{
 		bitrate = value;
 	}
+	/*!
+	 * Function: setDuration
+	 * \param int hour
+	 * \param int minute
+	 * \param double second
+	 */
 	public void setDuration(int hour,int minute,double second)
 	{
 		duration = hour+":"+minute+":"+Math.round(second);
@@ -52,6 +58,10 @@ public abstract class Profile implements Serializable
 	{
 		start = hour+":"+minute+":"+Math.round(second);
 	}
+	/*!
+	 * Funcion: setStart
+	 * \param double time
+	 */
 	public void setStart(double time)
 	{
 		double temp1 = time/60;
@@ -77,6 +87,11 @@ public abstract class Profile implements Serializable
 	{
 		extension = value;
 	}
+	/*!
+	 * Function: getBitRateCommand
+	 * \details returns string format of commands to be put in the command line
+	 * \return ArrayList<String>
+	 */
 	public ArrayList<String> getBitRateCommand()
 	{
 		ArrayList<String> output = new ArrayList<String>();
@@ -87,6 +102,11 @@ public abstract class Profile implements Serializable
 	{
 		return bitrate;
 	}
+	/*!
+	 * Function: getDurationCommand
+	 * \details returns string format of commands to be put in the command line
+	 * \return ArrayList<String>
+	 */
 	public ArrayList<String> getDurationCommand()
 	{
 		ArrayList<String> output = new ArrayList<String>();
@@ -102,6 +122,11 @@ public abstract class Profile implements Serializable
 	{
 		return extension;
 	}
+	/*!
+	 * Function: getStartCommand
+	 * \details returns string format of commands to be put in the command line
+	 * \return ArrayList<String>
+	 */
 	public ArrayList<String> getStartCommand()
 	{
 		ArrayList<String> output = new ArrayList<String>();
@@ -109,6 +134,11 @@ public abstract class Profile implements Serializable
 		output.add(start);
 		return output;
 	}
+	/*!
+	 * Function: getInputStartCommand
+	 * \details returns string format of commands to be put in the command line
+	 * \return ArrayList<String>
+	 */
 	public ArrayList<String> getInputStartCommand()
 	{
 		ArrayList<String> output = new ArrayList<String>();

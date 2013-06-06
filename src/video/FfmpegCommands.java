@@ -1,7 +1,7 @@
 package video;
 
 import javax.swing.JFrame;
-
+//! \details class creates and shows an instance of the interface
 public class FfmpegCommands {
 
 		public static void main(String [] args)

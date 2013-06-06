@@ -18,11 +18,10 @@ import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ExecutorService;
+//import java.util.concurrent.ExecutorService;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -36,8 +35,7 @@ import javax.swing.JTextField;
 
 import server.*;
 
-import video.OutputLogs.ACTION;
-
+//! \details manages the interface and starts the server
 public class Interface extends JFrame implements SourceFiles
 {
 	JPanel main;
@@ -46,13 +44,17 @@ public class Interface extends JFrame implements SourceFiles
 	JTextField processText,probeText,rootText,convertedText;
 	DefaultListModel<String> inModel,outModel;
 	private WindowEventHandler listener;
-	private InputFiles ifiles;
+	//private InputFiles ifiles;
 	private OutputFiles ofiles;
 	private Properties serversettings;
 	private ArrayList<SourceFile> files;
 	private Timer check,sourcechange;
-	private ExecutorService thread;
+	//private ExecutorService thread;
 	private Server contest;
+	/*!
+	 * Function: Interface
+	 * \details defines the window objects
+	 */
 	public Interface()
 	{
 		super("Video Processor");
@@ -131,8 +133,8 @@ public class Interface extends JFrame implements SourceFiles
 		addoutputButton = new JButton("Add Output");
 		addoutputButton.addActionListener(listener);
 		
-		runprocessButton = new JButton("Run");
-		runprocessButton.addActionListener(listener);
+		//runprocessButton = new JButton("Run");
+		//runprocessButton.addActionListener(listener);
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.VERTICAL;
@@ -202,6 +204,11 @@ public class Interface extends JFrame implements SourceFiles
 			saveSourceList();
 		}
 	}
+	/*!
+	 * Function: checkDirectory
+	 * \param File value
+	 * \details Recursively checks a folder tree and checks the files
+	 */
 	private void checkDirectory(File value)
 	{
 		File[] filelist = value.listFiles();
@@ -233,6 +240,10 @@ public class Interface extends JFrame implements SourceFiles
 				checkDirectory(filelist[x]);
 		}
 	}
+	/*!
+	 * Function: updateInputList
+	 * \details defines data to display for the inList JList
+	 */
 	private void updateInputList()
 	{
 		inModel.clear();
@@ -242,6 +253,10 @@ public class Interface extends JFrame implements SourceFiles
 		}
 		inList.setModel(inModel);
 	}
+	/*!
+	 * Function: updateOutputList
+	 * \details defines data to display for the outList JList
+	 */
 	private void updateOutputList()
 	{
 		ArrayList<String> list = ofiles.getFileList();
@@ -326,7 +341,7 @@ public class Interface extends JFrame implements SourceFiles
 			convertedText.setText(file.getSelectedFile().getAbsolutePath());
 		}
 	}
-	private void runCommands()
+	/*private void runCommands()
 	{
 		Process p;
 		OutputLogs stdout = null, errors = null;
@@ -359,7 +374,7 @@ public class Interface extends JFrame implements SourceFiles
 			stdout.Done();
 			errors.Done();
 		}
-	}
+	}*/
 	private void saveSettings()
 	{
 		try {
@@ -570,10 +585,10 @@ public class Interface extends JFrame implements SourceFiles
 			{
 				openOutput();
 			}
-			else if(e.getSource() == runprocessButton)
+		/*	else if(e.getSource() == runprocessButton)
 			{
 				runCommands();
-			}
+			}*/
 			else if(e.getSource() == saveButton)
 			{
 				saveSettings();

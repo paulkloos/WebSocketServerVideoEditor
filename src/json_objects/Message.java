@@ -3,7 +3,7 @@ package json_objects;
 import java.util.zip.DataFormatException;
 
 import json_objects.tools.Tool;
-
+//! \details used to receive commands
 public class Message
 {
 	public enum COMMAND{FILE_REQUEST,FILE_COMPILE,UPLOAD,FOLDER,STATUS,ACTION}
@@ -22,6 +22,11 @@ public class Message
 	{
 		return filters;
 	}
+	/*!
+	 * Function: getCommand
+	 * \return COMMAND
+	 * \details return what operation is being request, it throws and error if it doesn't recognize the request operation
+	 */
 	public COMMAND getCommand() throws DataFormatException
 	{
 		if(action.equals("file_request"))
